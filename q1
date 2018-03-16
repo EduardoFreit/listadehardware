@@ -1,0 +1,18 @@
+ 	.data
+x:	.word	7
+y:	.word	7
+z:	.word	0
+
+ .text   
+        .globl	main            
+        
+main:	lw	$t0,x	
+	lw	$t1,y
+	lw	$t2,z
+	bgt $t0,$t1, True	#se x >y va para True
+	add $t2,$t1,$zero	#else = z = y
+	j Fim	
+True:
+	srl $t2,$t1,2	#z = y>>2
+Fim:		
+	sw $t2, z	#Passando o valor de t2 para a variavel "z"(memória)
