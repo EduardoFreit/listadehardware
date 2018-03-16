@@ -1,0 +1,33 @@
+ 	.data
+x:	.word	7
+y:	.word	6
+z:	.word	8
+
+ .text   
+        .globl	main            
+        
+main:	lw	$t0,x		
+	lw	$t1,y
+	lw	$t2,z
+	add $t3, $t1, $t2	#atribuindo ao registradot t3  a soma de $t1 + $t2
+	blt $t3,$t0, noTri	#if(t3<t0) verficando se o lado t0 eh maior que a soma t3
+	add $t3, $t0, $t2	#atribuindo ao registradot t3  a soma de $t0 + $t1
+	blt $t3,$t1, noTri	#if(t3<t1) verficando se o lado t1 eh maior que a soma t3
+	add $t3, $t0, $t1	#atribuindo ao registradot t3  a soma de $t0 + $t1
+	blt $t3,$t2, noTri	#if(t3<t2) verficando se o lado t1 eh maior que a soma t3
+	bne $t0,$t1, noEq	#verificando se as medidas dos lados Ã± sÃ£o iguas, primeiro x != y pule para noEq?
+	bne $t0,$t2, noEq	#verificando se as medidas dos lados Ã± sÃ£o iguas, primeiro x != z pule para noEq?
+	li $2, 1		#Se o código chegar aqui, significa que eh um triangulo equilatero, Registrador 2 = 1
+	j exit
+noEq:
+	beq $t0, $t1, yeIso	#Vertificando se o triangulo possue 2 lados iguais, se sim, pule para yeIso(x==y)
+	beq $t0, $t2, yeIso	#Vertificando se o triangulo possue 2 lados iguais, se sim, pule para yeIso(x==z)
+	beq $t1, $t2, yeIso	#Vertificando se o triangulo possue 2 lados iguais, se sim, pule para yeIso(y==z)
+	li $4, 1		#Se o código chegar aqui, significa que o triangulo eh escaleno, Registrador 4 = 1
+	j exit
+yeIso:
+	li $3, 1		#Triangulo isoceles! Registrador 3 = 1
+	j exit
+noTri: 
+	li $v1, 1		#Nao é um triangulo! Registrador v1 = 1
+exit:
