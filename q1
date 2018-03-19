@@ -3,6 +3,8 @@ x:	.word	7
 y:	.word	7
 z:	.word	0
 
+
+
  .text   
         .globl	main            
         

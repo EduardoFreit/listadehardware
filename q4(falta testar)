@@ -9,6 +9,8 @@ i: .word 9 #t3
 
 main:
 
+
+
 lw $a0,a #base do array A
 lw $a1,b # Base do Array B
 la $t1,($a0) # t1 apontando para a0
