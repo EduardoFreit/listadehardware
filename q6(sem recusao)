@@ -1,0 +1,57 @@
+#	Implemente (recursivamente) na linguagem de montagem do MIPS, uma função que receba dois números 
+# a e b ( b >= a) e retorne a soma de todos os números contidos no intervalo [a,b]. Se a > b,
+# o valor 1 deverá ser armazenado no registrador v1 e o programa encerrado. 
+
+#baixar o codigo pra ver os comentarios CERTINHO.
+
+
+  .data
+a
+  a: .word 4  																		#$a0 vamos pegar de 4 ate 7
+  b: .word 7																			#$a1
+  destino: .word  															  #caso seja usado na primeiro condicao
+
+
+  .text
+     .globl main
+
+  main:
+
+
+  la $a0,a 																				#a0 apontando para A
+  la $a1,b 																				#a1 apontando para B
+
+
+  lw $t1,a   					                            #carregando o valor de a em t1
+  lw $t2,b              												  #carregando o valor de b em t2
+
+
+  bgt $t1, $t2, facaCondicao2								     #vamos verificar a condicao se a(t1) > b(t2) entao vamos para a condicao dois
+                                                 #se nao for pra condicao dois, entao o programa vai fazer a linha seguinte.
+
+  loop:
+  add $t3, $t3, $t1                              #soma em uma var aux t3 que ta zerada inicialmente com a nosso (t1)
+  beq $t1, $t2, salvDest                         #verifica se o nosso valor a (que servirar como contador) ja ta > a b. se tiver temos q parar, ele roda ate <=
+  addi $t1, $t1, 1                               #essa é nossa variavel a sendo incrementada
+  j loop                                         #laco que faz subir o loop
+   
+   
+  salvDest:
+  sw $t3, destino
+  j fim
+
+
+  facaCondicao2:                                  
+  addi $v1,$v1, 1                                  #somamos imediatamente 1, que seria 0 + 1 = 1 , 0 pois v1 nao tem nada ainda.
+  j fim                                            #e pulamos para o fim
+
+
+
+
+  fim:
+
+
+
+
+
+
