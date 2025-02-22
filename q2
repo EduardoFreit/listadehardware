@@ -1,6 +1,6 @@
  	.data
 x:	.word	7
-y:	.word	6
+y:	.word	6 
 z:	.word	8
 
  .text   
